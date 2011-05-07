@@ -1,0 +1,7 @@
+# Variación IPC % (vía http://www.ine.es/varipc/index.do)
+# desde Enero XXXX hasta Enero 2010
+2006,8.7
+2007,6.2
+2008,1.8
+2009,1.0
+
