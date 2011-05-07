@@ -36,7 +36,7 @@ def parse_file(filename)
     values = columns.map {|c| clean_number(c.text.strip)}
   
     # And output
-    puts "#{region},#{year},#{policy_id},#{policy_label},#{values.join(',')}"
+    puts CSV::generate_line([region,year,policy_id,policy_label]+values)
   end
 end
 
