@@ -3,7 +3,13 @@
 	%head
 		%meta{'http-equiv' => 'Content-Type', :content => 'text/html;charset=utf-8'}/
 		%title Presupuestos CCAA
-		%link{"rel" => "stylesheet", "href" => "/css/layout.css", "type" => "text/css"}
+		
+		%link{"rel" => "stylesheet", "href" => "/css/blueprint/screen.css", "type" => "text/css", "media" => "screen, projection"}
+		%link{"rel" => "stylesheet", "href" => "/css/blueprint/print.css", "type" => "text/css", "media" => "print"}
+		/[if lte IE 8]
+			%link{"rel" => "stylesheet", "href" => "/css/blueprint/ie.css", "type" => "text/css", "media" => "screen, projection"}
+
+		%link{"rel" => "stylesheet", "href" => "/css/blueprint/plugins/fancy-type/screen.css", "type" => "text/css", "media" => "screen, projection"}
 
 		/[if lte IE 8]
 			%script{ :type => "text/javascript", :src => "/js/excanvas.min.js" }
@@ -12,5 +18,5 @@
 		%script{ :type => "text/javascript", :src => "/js/app.js" }
 
 	%body
-		#container
+		.container
 			= yield

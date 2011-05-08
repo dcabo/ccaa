@@ -1,9 +1,18 @@
-%div
-	%h1 Elige una comunidad autónoma
-
-	%select#region
-		%option{:select=>true} Elige una Comunidad Autónoma
-		-@regions.each do |region|
-			%option{:value=>"#{region.id}"} #{region.name}
+%div.span-20.prepend-2
+	%h1 El comparómetro
+	%hr
 	
-	#placeholder{:style=>"width:600px;height:300px;"}
+	%h2.alt Lorem ipsum AbreDatos
+	%hr.space
+	
+	%h3.alt
+		Elige una comunidad autónoma...
+
+		%select#region
+			%option{:select=>true} &nbsp;
+			-@regions.each do |region|
+				%option{:value=>"#{region.id}"} #{region.name}
+		%hr
+	
+	
+	#placeholder{:style=>"width:300px;height:200px;"}
