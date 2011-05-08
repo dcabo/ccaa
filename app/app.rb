@@ -15,6 +15,7 @@ class RegionBudgetApp < Sinatra::Base
   
   get '/' do
     @regions = Region.all
+    @policies = Policy.all
     haml :index
   end
   
@@ -37,6 +38,5 @@ class RegionBudgetApp < Sinatra::Base
       :per_policy_data => per_policy_data
       }
     response.to_json
-  end
-  
+  end  
 end

@@ -1,0 +1,21 @@
+- Añadir nombres a gráficos
+
+- Calcular total CCAA
+
+- Calcular gasto per cápita
+
+- Calcular gasto %
+
+- Ajustar inflación
+
+- Comparar con segunda comunidad
+
+- Añadir texto introductorio
+
+- Mejorar look título
+
+- Add graph label formatter
+
+- Add region: national average
+
+- Sort graphs by amount? or just manually according to myself?
