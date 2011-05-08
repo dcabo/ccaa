@@ -27,7 +27,7 @@ class RegionBudgetApp < Sinatra::Base
     per_policy_data = {}
     expenses.each do |e|
       per_policy_data[e.policy_id] = {:label => region.name, :data => []} if per_policy_data[e.policy_id].nil?
-      per_policy_data[e.policy_id][:data] << [e.year, e.amount]
+      per_policy_data[e.policy_id][:data] << [e.year.to_s, e.amount]
     end
     
     # Prepare JSON response
