@@ -54,7 +54,7 @@ class RegionBudgetApp < Sinatra::Base
     response = { 
       :label => region.name, 
       :per_policy_data => per_policy_data,
-      :populations => populations.map{|p| {:year => p.year.to_s, :size => p.size}}
+      :populations => populations.map{|p| {p.year.to_s => p.size}}
       }
     response.to_json
   end  

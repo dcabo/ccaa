@@ -72,18 +72,31 @@ $(function () {
         });
     }
     
+    // Calculate data if needed
+    function processData(data, policy_id) {
+        switch ($("#comparison_mode").val()) {
+            case 'total':
+                return data[policy_id];
+                
+            case 'per_capita':
+            default:
+                return data[policy_id];
+        }
+    }
+    
+    // Redraw all graphs
     function displayGraphs() {
         $.each(policies, function(i, policy) { 
             var ds = new Array();
             if (first_region.per_policy_data != null && first_region.per_policy_data[policy.id] != null)
                 ds.push({
-                    data: first_region.per_policy_data[policy.id], 
+                    data: processData(first_region.per_policy_data, policy.id), 
                     label: first_region.label,
                     bars: { show: true, barWidth: 0.35, order: 1 }
                 });
             if (second_region.per_policy_data != null && second_region.per_policy_data[policy.id] != null)
                 ds.push({
-                    data: second_region.per_policy_data[policy.id], 
+                    data: processData(second_region.per_policy_data, policy.id), 
                     label: second_region.label,
                     bars: { show: true, barWidth: 0.35, order: 2 }
                 });
