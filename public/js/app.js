@@ -4,14 +4,16 @@ $(function () {
         points: { show: true },
         xaxis: { tickDecimals: 0, tickSize: 1 }
     };
-    var data = [];
+    var first_region = [];
+    var second_region = [];
     var placeholder = $("#placeholder");
     
-    $.plot(placeholder, data, options);
+    $.plot(placeholder, [], options);
     
-    $("#fetch_button").click(function () {
+    $("#region").change(function () {
         function onDataReceived(series) {
-            data.push(series);
+            first_region = series;
+            var data = [first_region, second_region];
             $.plot(placeholder, data, options);
         }
         

@@ -1,9 +1,5 @@
 %div
 	%h1 #{@region.name}
-	
-	#placeholder{:style=>"width:600px;height:300px;"}
-	
-	%input#fetch_button{:type=>"button", :value=>"get data"}
    
 	-@expenses.each do |e|
 		%li #{e.year} #{e.policy.id} #{e.policy.name} #{e.amount}

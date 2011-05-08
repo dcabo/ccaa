@@ -1,6 +1,9 @@
 %div
 	%h1 Elige una comunidad autónoma
 
-	-@regions.each do |region|
-		%li 
-			%a{:href=>"/ca/#{region.id}"} #{region.name}
+	%select#region
+		%option{:select=>true} Elige una Comunidad Autónoma
+		-@regions.each do |region|
+			%option{:value=>"#{region.id}"} #{region.name}
+	
+	#placeholder{:style=>"width:600px;height:300px;"}
