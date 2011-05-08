@@ -79,11 +79,17 @@ $(function () {
             case 'total':
                 series = data.per_policy_data[policy_id];
                 break;
+
+            case 'population':
+                $.each(data.per_policy_data[policy_id], function(i, expense) {
+                    series.push([expense[0], data.populations[expense[0]]]);
+                });
+                break;
                 
             case 'per_capita':
             default:
                 $.each(data.per_policy_data[policy_id], function(i, expense) {
-                    series.push([expense[0], 1000.0*expense[1]/data.populations[2010]]);
+                    series.push([expense[0], 1000.0*expense[1]/data.populations[expense[0]]]);
                 });
                 break;
         }
