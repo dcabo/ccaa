@@ -15,7 +15,7 @@
 			-@regions.each do |region|
 				%option{:value=>"#{region.id}"} #{region.name}
 	%h3.alt.span-8#region2-div{:style => "border-bottom: 8px solid rgb(175,216,248)"}
-		&nbsp;...y compara con otra
+		&nbsp;...y compárala con otra
 		%select#region2
 			%option{:select=>true} &nbsp;
 			-@regions.each do |region|

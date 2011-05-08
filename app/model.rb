@@ -24,12 +24,19 @@ class Expense
   include DataMapper::Resource  
 
   property :id,           Serial, :key => true
-  property :region_id,    String, :length => 2
-  property :policy_id,    String, :length => 2
   property :year,         Integer
   property :amount,       Float
   
   belongs_to :policy
+  belongs_to :region
+end
+
+class Population
+  include DataMapper::Resource  
+
+  property :id,           Serial, :key => true
+  property :size,         Integer
+  
   belongs_to :region
 end
 

@@ -25,9 +25,7 @@ class RegionBudgetApp < Sinatra::Base
     # TODO: Move this to URL and fetch using Ajax
     ids = Expense.all(:region_id => '00', :year => '2010', :order => :amount.desc).map &:policy_id
     @policies = ids.map{|id| {:id => id, :name => Policy.get(id).name}}
-    
-    puts @policies.to_json
-    
+        
     haml :index
   end
   
