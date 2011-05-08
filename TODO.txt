@@ -14,7 +14,7 @@ Data
 
 Look and feel
 =============
+- Add legend
 - Mejorar look título
 - Add graph label formatter
-- Add hover
-- Add legend
+- Improve display of amounts in tooltip

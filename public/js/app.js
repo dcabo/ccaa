@@ -3,9 +3,44 @@ $(function () {
     $("#graphs").hide();    
     $("#region2-div").hide();
     
+    // Tooltip, taken from Flot example
+    function showTooltip(x, y, contents) {
+        $('<div id="tooltip">' + contents + '</div>').css( {
+            position: 'absolute',
+            display: 'none',
+            top: y + 5,
+            left: x + 5,
+            border: '1px solid #fdd',
+            padding: '2px',
+            'background-color': '#fee',
+            opacity: 0.80
+        }).appendTo("body").fadeIn(200);
+    };
+    var previousPoint = null;
+    function onHover(event, pos, item) {
+        if (item) {
+            if (previousPoint != item.dataIndex) {
+                previousPoint = item.dataIndex;
+                
+                $("#tooltip").remove();
+                var x = item.datapoint[0].toFixed(2),
+                    y = item.datapoint[1].toFixed(2);
+                
+                showTooltip(item.pageX, item.pageY,
+                            item.series.label + " : " + y);
+            }
+        }
+        else {
+            $("#tooltip").remove();
+            previousPoint = null;            
+        }
+    };
+    
+    // Generate all Flot graphs
     var graphs = {};
     $.each(policies, function(i, policy) { 
         var new_graph = $("<div id='graph-"+policy.id+"' style='width:250px;height:200px;'</div>");
+        new_graph.bind("plothover", onHover);
         graphs[policy.id] = new_graph;
 
         var new_div = $("<div class='span-6'><p style='text-align:center; font-weight:bold; font-variant: small-caps;'>"+policy.name+"</p></div>");
@@ -17,13 +52,16 @@ $(function () {
             $("#graphs").append("<div class='clear'></div>");
     });
     
+    // Auxiliary Flot stuff
     var options = {
         xaxis: { tickDecimals: 0, tickSize: 1, labelWidth: 40, reserveSpace: true },
-        legend: { show: false }
+        legend: { show: false },
+        grid: { hoverable: true }
     };
     var first_region = {};
     var second_region = {};
     
+    // Retrieve data from server
     function fetchData(region, callback) {
         var dataurl = "/ca/"+region;
         $.ajax({
@@ -40,6 +78,7 @@ $(function () {
             if (first_region.per_policy_data != null && first_region.per_policy_data[policy.id] != null)
                 ds.push({
                     data: first_region.per_policy_data[policy.id].data, 
+                    label: first_region.label,
                     bars: { show: true, barWidth: 0.35, order: 1 }
                 });
             if (second_region.per_policy_data != null && second_region.per_policy_data[policy.id] != null)
@@ -53,6 +92,7 @@ $(function () {
         $("#graphs").show();    // Hidden at start
     }
     
+    // Event handling
     $("#region").change(function () {
         function onDataReceived(data) {
             first_region = data;

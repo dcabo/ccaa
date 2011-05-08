@@ -2,7 +2,12 @@
 	%h1 ¿Dónde van mis impuestos... en mi región?
 	%hr
 	
-	%h2.alt Lorem ipsum AbreDatos
+	%h2.alt 
+		Lorem ipsum AbreDatos
+
+	%h4.alt
+		NOTA: Todas las cantidades en miles de euros. Cantidades nominales, no ajustadas a la inflación.
+						
 	%hr.space
 	
 	%h3.alt.span-8.prepend-2#region1-div
@@ -18,7 +23,6 @@
 			%option{:select=>true} &nbsp;
 			-@regions.each do |region|
 				%option{:value=>"#{region.id}"} #{region.name}
-				
 	%hr
 
 	:javascript
@@ -26,3 +30,4 @@
 		var policies = #{@policies.to_json}
 
 	#graphs
+	
