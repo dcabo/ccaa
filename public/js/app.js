@@ -54,7 +54,7 @@ $(function () {
     
     // Auxiliary Flot stuff
     var options = {
-        xaxis: { tickDecimals: 0, tickSize: 1, labelWidth: 60, reserveSpace: true },
+        xaxis: { tickDecimals: 0, tickSize: 1, labelWidth: 50, reserveSpace: true },
         legend: { show: false, container: '#graph_legend' },
         grid: { hoverable: true }
     };
@@ -77,12 +77,14 @@ $(function () {
         var series = [];
         switch ($("#comparison_mode").val()) {
             case 'total':
-                series = data.per_policy_data[policy_id];
+                $.each(data.per_policy_data[policy_id], function(year, expense) {
+                    series.push([year, expense]);
+                });
                 break;
 
             case 'population':
-                $.each(data.per_policy_data[policy_id], function(i, expense) {
-                    series.push([expense[0], data.populations[expense[0]]]);
+                $.each(data.per_policy_data[policy_id], function(year, expense) {
+                    series.push([year, data.populations[year]/1000.0]);
                 });
                 break;
 
@@ -95,8 +97,8 @@ $(function () {
                 
             case 'per_capita':
             default:
-                $.each(data.per_policy_data[policy_id], function(i, expense) {
-                    series.push([expense[0], 1000.0*expense[1]/data.populations[expense[0]]]);
+                $.each(data.per_policy_data[policy_id], function(year, expense) {
+                    series.push([year, 1000.0*expense/data.populations[year]]);
                 });
                 break;
         }

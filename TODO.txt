@@ -5,10 +5,8 @@ Features
 
 Data
 ====
-- Calcular gasto per cápita
 - Calcular gasto %
 - Ajustar inflación
-- Simplify JSON format (not Flot specific)
 
 Look and feel
 =============

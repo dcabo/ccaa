@@ -1,29 +1,26 @@
 %div.span-20.prepend-2
 	%h1 ¿Dónde van mis impuestos... en mi región?
 	%hr
-	
-	%h2.alt.prepend-2.span-16
-		Lorem ipsum AbreDatos
 
-	%hr.space
-	
-	%h3.span-2
-	%h3.alt.span-8#region1-div{:style => "border-bottom: 8px solid rgb(237,194,64)"}
-		Elige una comunidad autónoma...
-		%select#region
-			%option{:selected=>true} &nbsp;
-			-@regions.each do |region|
-				%option{:value=>"#{region.id}"} #{region.name}
-	%h3.alt.span-8#region2-div{:style => "border-bottom: 8px solid rgb(175,216,248)"}
-		&nbsp;...y compárala con otra
-		%select#region2
-			%option{:selected=>true} &nbsp;
-			-@regions.each do |region|
-				%option{:value=>"#{region.id}"} #{region.name}
-	%hr.space
+	%title_div.prepend-1.span-18
 
-	%h4.alt.prepend-2.span-16
-		NOTA: Cantidades nominales, no ajustadas a la inflación (todavía).
+		%h2.alt
+			Lorem ipsum AbreDatos
+
+		%hr.space
+		%h3.alt.span-8#region1-div{:style => "border-bottom: 8px solid rgb(237,194,64)"}
+			Elige una comunidad autónoma...
+			%select#region
+				%option{:selected=>true} &nbsp;
+				-@regions.each do |region|
+					%option{:value=>"#{region.id}"} #{region.name}
+		%h3.alt.span-8#region2-div{:style => "border-bottom: 8px solid rgb(175,216,248)"}
+			&nbsp;...y compárala con otra
+			%select#region2
+				%option{:selected=>true} &nbsp;
+				-@regions.each do |region|
+					%option{:value=>"#{region.id}"} #{region.name}
+		%hr.space
 						
 	%hr
 	
@@ -41,5 +38,20 @@
 			%select#comparison_mode
 				%option{:value=>"total"} Gasto total (miles de euros)
 				%option{:selected=>true, :value=>"per_capita"} Gasto per cápita (euros)
-				-- TODO %option{:value=>"share_total"} Porcentaje sobre gasto total
-				%option{:value=>"population"} Población (censo INE)
+				<!-- %option{:value=>"share_total"} Porcentaje sobre gasto total -->
+				%option{:value=>"population"} Población (miles de personas)
+
+				
+	%hr.space
+	%hr.space
+	
+	%p.alt.large 
+		NOTA: Cantidades nominales, no ajustadas a la inflación (todavía).
+		%br
+		Fuentes: Datos presupuestarios del
+		%a{:href=>"http://servicioswebbis.meh.es/apps/comunidadesautonomas/"}
+			Ministerio de Economía y Hacienda
+		&nbsp;/ Datos de población del 
+		%a{:href=>"http://www.ine.es/jaxi/menu.do?type=pcaxis&path=%2Ft20%2Fe260&file=inebase&N=&L=0"}
+			Instituto Nacional de Estadística (Padrón)
+

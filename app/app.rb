@@ -35,21 +35,21 @@ class RegionBudgetApp < Sinatra::Base
     expenses = region.expenses
     
     populations = {}
-    region.populations.each{|p| populations[p.year.to_s] = p.size }
+    region.populations.each{|p| populations[p.year] = p.size }
     
     # Reshuffle as needed for visualization
     per_policy_data = {}
     expenses.each do |e|
-      per_policy_data[e.policy_id] = [] if per_policy_data[e.policy_id].nil?
-      per_policy_data[e.policy_id] << [e.year.to_s, e.amount]
+      per_policy_data[e.policy_id] = {} if per_policy_data[e.policy_id].nil?
+      per_policy_data[e.policy_id][e.year] = e.amount
     end
 
     # TODO: Clean up total calculation
     total = {}
     expenses.each do |e|
-      total[e.year.to_s] = total[e.year.to_s].nil? ? e.amount : total[e.year.to_s]+e.amount
+      total[e.year] = total[e.year].nil? ? e.amount : total[e.year]+e.amount
     end
-    per_policy_data['00'] = total.sort
+    per_policy_data['00'] = total
     
     # Prepare JSON response
     content_type :json
