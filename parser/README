@@ -1,0 +1,2 @@
+# Import data into DB
+$ rake data:import[parser/output.txt]
