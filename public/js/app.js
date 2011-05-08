@@ -7,9 +7,12 @@ $(function () {
     
     var graphs = {};
     $.each(series_ids, function(i, series) { 
-        var new_graph = $("<div id='graph-"+series+"' class='span-4' style='width:250px;height:200px;'</div>");
-        $("#graphs").append(new_graph);
+        var new_graph = $("<div id='graph-"+series+"' style='width:250px;height:200px;'</div>");
         graphs[series] = new_graph;
+
+        var new_div = $("<div class='span-6'><p class='caps' style='text-align:center'>Label</p></div>");
+        new_div.prepend(new_graph);
+        $("#graphs").append(new_div);
     });
     
     var options = {
