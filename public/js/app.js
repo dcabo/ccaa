@@ -1,5 +1,7 @@
 $(function () {
-    $("#graphs").hide();    // Hidden at start
+    // Hidden at start
+    $("#graphs").hide();    
+    $("#region2-div").hide();
     
     var graphs = {};
     $.each(policies, function(i, policy) { 
@@ -21,29 +23,48 @@ $(function () {
         legend: { show: false },
         grid: { markings: [] }
     };
-    var first_region = [];
-    var second_region = [];
+    var first_region = {};
+    var second_region = {};
     
-    $("#region").change(function () {
-        function onDataReceived(data) {
-            first_region = data;
-            $.each(policies, function(i, policy) { 
-                var series_data = first_region.per_policy_data[policy.id];
-                if ( series_data == null ) {
-                    series_data = [];
-                }
-                $.plot(graphs[policy.id], [series_data, second_region], options);
-            });
-        }
-        
-        $("#graphs").show();    // Hidden at start
-        
-        var dataurl = "/ca/"+$("#region").val();
+    function fetchData(region, callback) {
+        var dataurl = "/ca/"+region;
         $.ajax({
             url: dataurl,
             method: 'GET',
             dataType: 'json',
-            success: onDataReceived
+            success: callback
         });
+    }
+    
+    function displayGraphs() {
+        $.each(policies, function(i, policy) { 
+            var first = [];
+            if (first_region.per_policy_data != null && first_region.per_policy_data[policy.id] != null)
+                first = first_region.per_policy_data[policy.id];
+            
+            var second = [];
+            if (second_region.per_policy_data != null && second_region.per_policy_data[policy.id] != null)
+                second = second_region.per_policy_data[policy.id];
+                
+            $.plot(graphs[policy.id], [first, second], options);
+        });
+        $("#graphs").show();    // Hidden at start
+    }
+    
+    $("#region").change(function () {
+        function onDataReceived(data) {
+            first_region = data;
+            displayGraphs();
+        }
+        fetchData($("#region").val(), onDataReceived);
+        $("#region2-div").show();    // Hidden at start
+    });
+
+    $("#region2").change(function () {
+        function onDataReceived(data) {
+            second_region = data;
+            displayGraphs();
+        }
+        fetchData($("#region2").val(), onDataReceived);
     });
 });

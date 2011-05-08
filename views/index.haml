@@ -5,14 +5,21 @@
 	%h2.alt Lorem ipsum AbreDatos
 	%hr.space
 	
-	%h3.alt
+	%h3.alt.span-8.prepend-2#region1-div
 		Elige una comunidad autónoma...
-
 		%select#region
 			%option{:select=>true} &nbsp;
 			-@regions.each do |region|
 				%option{:value=>"#{region.id}"} #{region.name}
-		%hr
+
+	%h3.alt.span-8#region2-div
+		&nbsp;...y compara con otra
+		%select#region2
+			%option{:select=>true} &nbsp;
+			-@regions.each do |region|
+				%option{:value=>"#{region.id}"} #{region.name}
+				
+	%hr
 
 	:javascript
 		// Used to generate graphs dynamically vía app.js

@@ -1,21 +1,22 @@
-- Calcular total CCAA
-
-- Calcular gasto per cápita
-
-- Calcular gasto %
-
-- Ajustar inflación
-
+Features
+========
 - Comparar con segunda comunidad
-
 - Añadir texto introductorio
+- Add URL history handling
 
-- Mejorar look título
-
-- Add graph label formatter
-
+Data
+====
+- Calcular total CCAA
+- Calcular gasto per cápita
+- Calcular gasto %
+- Ajustar inflación
+- Sort graphs by amount? or just manually according to myself?
 - Add region: national average
 
-- Sort graphs by amount? or just manually according to myself?
-
+Look and feel
+=============
 - Improve handling of graphs with no data
+- Mejorar look título
+- Add graph label formatter
+- Add hover
+- Add legend
