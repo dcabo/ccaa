@@ -15,7 +15,7 @@ class RegionBudgetApp < Sinatra::Base
   
   get '/' do
     @regions = Region.all
-    # Hacky way of removing three policies that are always empty, but in the budget data
+    # FIXME: Hacky way of removing three policies that are always empty, but in the budget data
     @policies = Policy.all.select{|p| not ['12','22', '25'].include? p.id}
     
     haml :index
@@ -26,12 +26,19 @@ class RegionBudgetApp < Sinatra::Base
     region = Region.first(:id => params[:region])
     expenses = region.expenses
     
-    # Reorder as needed for visualization
+    # Reshuffle as needed for visualization
     per_policy_data = {}
     expenses.each do |e|
       per_policy_data[e.policy_id] = {:label => region.name, :data => []} if per_policy_data[e.policy_id].nil?
       per_policy_data[e.policy_id][:data] << [e.year.to_s, e.amount]
     end
+
+    # TODO: Clean up total calculation
+    total = {}
+    expenses.each do |e|
+      total[e.year.to_s] = total[e.year.to_s].nil? ? e.amount : total[e.year.to_s]+e.amount
+    end
+    per_policy_data['00'] = {:label => region.name, :data => total.sort}
     
     # Prepare JSON response
     content_type :json

@@ -39,7 +39,7 @@ $(function () {
     // Generate all Flot graphs
     var graphs = {};
     $.each(policies, function(i, policy) { 
-        var new_graph = $("<div id='graph-"+policy.id+"' style='width:250px;height:200px;'</div>");
+        var new_graph = $("<div id='graph-"+policy.id+"' style='width:250px;height:190px;'</div>");
         new_graph.bind("plothover", onHover);
         graphs[policy.id] = new_graph;
 
@@ -54,7 +54,7 @@ $(function () {
     
     // Auxiliary Flot stuff
     var options = {
-        xaxis: { tickDecimals: 0, tickSize: 1, labelWidth: 40, reserveSpace: true },
+        xaxis: { tickDecimals: 0, tickSize: 1, labelWidth: 60, reserveSpace: true },
         legend: { show: false, container: '#graph_legend' },
         grid: { hoverable: true }
     };

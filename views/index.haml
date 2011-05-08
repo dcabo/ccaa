@@ -29,7 +29,10 @@
 	
 	:javascript
 		// Used to generate graphs dynamically vía app.js
-		var policies = #{@policies.to_json}
+		var policies = #{@policies.to_json};
+		
+		// FIXME: Hack!
+		policies.unshift({"name":"TOTAL","id":"00"});
 
 	#graph_legend
 	
