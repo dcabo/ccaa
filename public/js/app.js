@@ -17,7 +17,7 @@ $(function () {
             $.plot(placeholder, data, options);
         }
         
-        var dataurl = "/data.json";
+        var dataurl = "/ca/"+$("#region").val();
         $.ajax({
             url: dataurl,
             method: 'GET',
