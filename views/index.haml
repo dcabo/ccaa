@@ -1,15 +1,43 @@
+%hr.space
+
 %div.span-20.prepend-2
-	%h1 ¿Dónde van mis impuestos... en mi región?
+	%h1{:style => "font-family: 'Francois One', arial, serif;"} ¿Dónde van mis impuestos...
+	%h1{:style => "font-family: 'Francois One', arial, serif; text-align: right"} ...en mi comunidad?
 	%hr
 
 	%title_div.prepend-1.span-18
 
 		%h2.alt
-			Lorem ipsum AbreDatos
+			Desde
+			%a{:href=>"http://www.dondevanmisimpuestos.es"}¿Dónde van mis impuestos?
+			queremos mostrar cómo gastan el dinero público las distintas administraciones públicas en España.
+			Una gran parte del gasto la realiza los gobiernos autonómicos, pero no es posible conseguir sus
+			presupuestos en un formato estándar y procesable, sólo en PDFs no estructurados.
+			
+		%h3.alt
+			Como parte del
+			%a{:href=>"http://www.abredatos.es"}Desafío AbreDatos 2011
+			hemos querido dar un primer paso para mostrar a qué se dedica nuestro dinero, usando los
+			resúmenes presupuestarios publicados por el Ministerio de Economía y Hacienda. Aunque 
+			tienen poco detalle, permiten ver la evolución de los últimos años, y hacer comparativas
+			entre regiones.
+			%br
+			%br
+			¿Quieres ver más detalle? Nosotros también. Exige a tu gobierno regional y a tu 
+			ayuntamiento que publiquen sus presupuestos detallados (y todos sus otros datos)
+			en formatos abiertos. ¡Exige
+			%a{:href=>"http://opengovernmentdata.org/film/"}Datos Abiertos
+			!
+			%br
+			%br
+			¿Quieres echarnos una mano?
+			%a{:href=>"mailto:david@dondevanmisimpuestos.es"}Escríbeme
+			o búscame en Twitter (@dcabo).
+			
 
 		%hr.space
 		%h3.alt.span-8#region1-div{:style => "border-bottom: 8px solid rgb(237,194,64)"}
-			Elige una comunidad autónoma...
+			Ahora, elige una comunidad autónoma...
 			%select#region
 				%option{:selected=>true} &nbsp;
 				-@regions.each do |region|
@@ -49,8 +77,7 @@
 		NOTA: Cantidades nominales, no ajustadas a la inflación (todavía).
 		%br
 		Fuentes: Datos presupuestarios del
-		%a{:href=>"http://servicioswebbis.meh.es/apps/comunidadesautonomas/"}
-			Ministerio de Economía y Hacienda
+		%a{:href=>"http://servicioswebbis.meh.es/apps/comunidadesautonomas/"}Ministerio de Economía y Hacienda
 		&nbsp;/ Datos de población del 
 		%a{:href=>"http://www.ine.es/jaxi/menu.do?type=pcaxis&path=%2Ft20%2Fe260&file=inebase&N=&L=0"}
 			Instituto Nacional de Estadística (Padrón)
