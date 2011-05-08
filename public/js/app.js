@@ -1,3 +1,26 @@
+function suffixFormatter(val, axis) {
+    switch ($("#comparison_mode").val()) {
+        case 'total':
+        case 'population':    
+            if (val >= 1000000) {
+                var decimals = (( val % 1000000 ) == 0) ? 0 : axis.tickDecimals;
+                return (val / 1000000).toFixed(decimals) + "M";
+            } else if (val >= 1000) {
+                var decimals = (( val % 1000 ) == 0) ? 0 : axis.tickDecimals;
+                return (val / 1000).toFixed(decimals) + "m";
+            } else {
+                decimals = (( val % 1 ) == 0) ? 0 : axis.tickDecimals;
+                return val.toFixed(decimals) + "";
+            }
+            
+        case 'per_capita':
+            return val.toFixed(0);
+            
+        default:
+            return val.toFixed(axis.tickDecimals);
+    }
+}
+
 $(function () {
     // Hidden at start
     $("#graphs").hide();    
@@ -55,6 +78,7 @@ $(function () {
     // Auxiliary Flot stuff
     var options = {
         xaxis: { tickDecimals: 0, tickSize: 1, labelWidth: 50, reserveSpace: true },
+        yaxis: { tickDecimals: 2, tickFormatter: suffixFormatter },  // TODO: , labelWidth: 50, reserveSpace: false
         legend: { show: false, container: '#graph_legend' },
         grid: { hoverable: true }
     };
@@ -79,13 +103,13 @@ $(function () {
         switch ($("#comparison_mode").val()) {
             case 'total':
                 $.each(data.per_policy_data[policy_id], function(year, expense) {
-                    series.push([parseInt(year)+offset, expense]);
+                    series.push([parseInt(year)+offset, 1000.0*expense]);
                 });
                 break;
 
             case 'population':
                 $.each(data.per_policy_data[policy_id], function(year, expense) {
-                    series.push([parseInt(year)+offset, data.populations[year]/1000.0]);
+                    series.push([parseInt(year)+offset, data.populations[year]]);
                 });
                 break;
 

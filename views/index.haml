@@ -68,11 +68,13 @@
 		%h2.alt.prepend-6.loud
 			Estás viendo...
 			%select#comparison_mode
-				%option{:value=>"total"} Gasto total (miles de euros)
-				%option{:selected=>true, :value=>"per_capita"} Gasto per cápita (euros)
-				%option{:value=>"share_total"} Porcentaje sobre gasto total
-				%option{:value=>"population"} Población (miles de personas)
+				%option{:value=>"total"} Gasto anual total (euros)
+				%option{:selected=>true, :value=>"per_capita"} Gasto anual per cápita (euros)
+				%option{:value=>"share_total"} Porcentaje sobre gasto total (%)
+				%option{:value=>"population"} Población a 1 de Enero
 
+		%p.small.prepend-8
+			Abreviaturas: m=mil, M=millón
 				
 	%hr.space
 	%hr.space
