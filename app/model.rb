@@ -35,6 +35,7 @@ class Population
   include DataMapper::Resource  
 
   property :id,           Serial, :key => true
+  property :year,         Integer
   property :size,         Integer
   
   belongs_to :region

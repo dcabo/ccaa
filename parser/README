@@ -1,2 +1,5 @@
 # Import data into DB
 $ rake data:import[parser/output.txt]
+
+# Import reference data into DB
+$ rake data:import_population[sandbox/poblacion.csv]
