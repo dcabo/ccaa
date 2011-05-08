@@ -3,6 +3,13 @@
 	%head
 		%meta{'http-equiv' => 'Content-Type', :content => 'text/html;charset=utf-8'}/
 		%title Presupuestos CCAA
+		%link{"rel" => "stylesheet", "href" => "/css/layout.css", "type" => "text/css"}
+
+		/[if lte IE 8]
+			%script{ :type => "text/javascript", :src => "/js/excanvas.min.js" }
+		%script{ :type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" }
+		%script{ :type => "text/javascript", :src => "/js/jquery.flot.js" }
+		%script{ :type => "text/javascript", :src => "/js/app.js" }
 
 	%body
 		#container
