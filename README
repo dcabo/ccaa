@@ -1,0 +1,3 @@
+Heroku deployment:
+
+- heroku db:push sqlite://development.db

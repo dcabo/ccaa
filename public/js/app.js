@@ -1,4 +1,6 @@
 $(function () {
+    $("#graphs").hide();    // Hidden at start
+    
     var graphs = {};
     $.each(policies, function(i, policy) { 
         var new_graph = $("<div id='graph-"+policy.id+"' style='width:250px;height:200px;'</div>");
@@ -33,6 +35,8 @@ $(function () {
                 $.plot(graphs[policy.id], [series_data, second_region], options);
             });
         }
+        
+        $("#graphs").show();    // Hidden at start
         
         var dataurl = "/ca/"+$("#region").val();
         $.ajax({
