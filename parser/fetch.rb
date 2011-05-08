@@ -32,6 +32,6 @@ def fetch_region(region)
 end
 
 # Get all available data... 
-1.upto(19).each do |region|         # 0: total, 1: Andalucía... 19: Melilla
+0.upto(19).each do |region|         # 0: total, 1: Andalucía... 19: Melilla
   fetch_region(region)
 end
