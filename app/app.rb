@@ -15,7 +15,9 @@ class RegionBudgetApp < Sinatra::Base
   
   get '/' do
     @regions = Region.all
-    @policies = Policy.all
+    # Hacky way of removing three policies that are always empty, but in the budget data
+    @policies = Policy.all.select{|p| not ['12','22', '25'].include? p.id}
+    
     haml :index
   end
   
