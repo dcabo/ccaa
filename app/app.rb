@@ -7,6 +7,7 @@ require 'json'
 
 require 'app/model'
 
+# TODO: Remove hardwired constants
 class RegionBudgetApp < Sinatra::Base
   
   # Enable serving of static files
@@ -15,8 +16,17 @@ class RegionBudgetApp < Sinatra::Base
   
   get '/' do
     @regions = Region.all
-    # FIXME: Hacky way of removing three policies that are always empty, but in the budget data
-    @policies = Policy.all.select{|p| not ['12','22', '25'].include? p.id}
+
+    # Get the policies in descending amount order for last year
+    # (Doing this instead of returning Policy.all has the benefit of not 
+    # including policies that are in the budget but never have amounts - 
+    # like Defence, and - at the front-end - sorting out the graphs based 
+    # on amount makes more sense)
+    # TODO: Move this to URL and fetch using Ajax
+    ids = Expense.all(:region_id => '00', :year => '2010', :order => :amount.desc).map &:policy_id
+    @policies = ids.map{|id| {:id => id, :name => Policy.get(id).name}}
+    
+    puts @policies.to_json
     
     haml :index
   end

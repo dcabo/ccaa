@@ -8,8 +8,6 @@ Data
 - Calcular gasto per cápita
 - Calcular gasto %
 - Ajustar inflación
-- Sort graphs by amount? or just manually according to myself?
-- Add region: national average
 
 Look and feel
 =============
