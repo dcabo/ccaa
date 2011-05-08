@@ -33,14 +33,4 @@ class Expense
   belongs_to :region
 end
 
-# Convenience method, copied from Rails' active_support
-class DataMapper::Collection 
-  def index_by
-    inject({}) do |accum, elem|
-      accum[yield(elem)] = elem
-      accum
-    end
-  end
-end
-
 DataMapper.auto_upgrade!
