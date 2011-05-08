@@ -5,7 +5,6 @@ Features
 
 Data
 ====
-- Calcular total CCAA
 - Calcular gasto per cápita
 - Calcular gasto %
 - Ajustar inflación
