@@ -23,7 +23,7 @@
 	%hr.space
 
 	%h4.alt.prepend-2.span-16
-		NOTA: Todas las cantidades en miles de euros. Cantidades nominales, no ajustadas a la inflación.
+		NOTA: Cantidades nominales, no ajustadas a la inflación (todavía).
 						
 	%hr
 	
@@ -33,8 +33,11 @@
 		
 		// FIXME: Hack!
 		policies.unshift({"name":"TOTAL","id":"00"});
-
-	#graph_legend
 	
 	#graphs.prepend-1
-	
+
+		%h2.alt.prepend-6.loud
+			Estás viendo...
+			%select#comparison_mode
+				%option{:value=>"total"} Gasto total (miles de euros)
+				%option{:value=>"per_capita"} Gasto per cápita

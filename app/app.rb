@@ -38,8 +38,8 @@ class RegionBudgetApp < Sinatra::Base
     # Reshuffle as needed for visualization
     per_policy_data = {}
     expenses.each do |e|
-      per_policy_data[e.policy_id] = {:label => region.name, :data => []} if per_policy_data[e.policy_id].nil?
-      per_policy_data[e.policy_id][:data] << [e.year.to_s, e.amount]
+      per_policy_data[e.policy_id] = [] if per_policy_data[e.policy_id].nil?
+      per_policy_data[e.policy_id] << [e.year.to_s, e.amount]
     end
 
     # TODO: Clean up total calculation
@@ -47,7 +47,7 @@ class RegionBudgetApp < Sinatra::Base
     expenses.each do |e|
       total[e.year.to_s] = total[e.year.to_s].nil? ? e.amount : total[e.year.to_s]+e.amount
     end
-    per_policy_data['00'] = {:label => region.name, :data => total.sort}
+    per_policy_data['00'] = total.sort
     
     # Prepare JSON response
     content_type :json
