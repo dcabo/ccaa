@@ -10,14 +10,14 @@
 						
 	%hr.space
 	
-	%h3.alt.span-8.prepend-2#region1-div
+	%h3.span-2
+	%h3.alt.span-8#region1-div{:style => "border-bottom: 8px solid rgb(237,194,64)"}
 		Elige una comunidad autónoma...
 		%select#region
 			%option{:select=>true} &nbsp;
 			-@regions.each do |region|
 				%option{:value=>"#{region.id}"} #{region.name}
-
-	%h3.alt.span-8#region2-div
+	%h3.alt.span-8#region2-div{:style => "border-bottom: 8px solid rgb(175,216,248)"}
 		&nbsp;...y compara con otra
 		%select#region2
 			%option{:select=>true} &nbsp;
@@ -29,5 +29,7 @@
 		// Used to generate graphs dynamically vía app.js
 		var policies = #{@policies.to_json}
 
-	#graphs
+	#graph_legend
+	
+	#graphs.prepend-1
 	

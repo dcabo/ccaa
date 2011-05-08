@@ -55,7 +55,7 @@ $(function () {
     // Auxiliary Flot stuff
     var options = {
         xaxis: { tickDecimals: 0, tickSize: 1, labelWidth: 40, reserveSpace: true },
-        legend: { show: false },
+        legend: { show: false, container: '#graph_legend' },
         grid: { hoverable: true }
     };
     var first_region = {};
