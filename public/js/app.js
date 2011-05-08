@@ -73,18 +73,19 @@ $(function () {
     }
     
     // Calculate data if needed
-    function processData(data, policy_id) {
+    // FIXME: offset is a hack, the plugin to unpile bars in Flot doesn't work well?!
+    function processData(data, policy_id, offset) {
         var series = [];
         switch ($("#comparison_mode").val()) {
             case 'total':
                 $.each(data.per_policy_data[policy_id], function(year, expense) {
-                    series.push([year, expense]);
+                    series.push([parseInt(year)+offset, expense]);
                 });
                 break;
 
             case 'population':
                 $.each(data.per_policy_data[policy_id], function(year, expense) {
-                    series.push([year, data.populations[year]/1000.0]);
+                    series.push([parseInt(year)+offset, data.populations[year]/1000.0]);
                 });
                 break;
 
@@ -98,7 +99,7 @@ $(function () {
             case 'per_capita':
             default:
                 $.each(data.per_policy_data[policy_id], function(year, expense) {
-                    series.push([year, 1000.0*expense/data.populations[year]]);
+                    series.push([parseInt(year)+offset, 1000.0*expense/data.populations[year]]);
                 });
                 break;
         }
@@ -111,15 +112,15 @@ $(function () {
             var ds = new Array();
             if (first_region.per_policy_data != null && first_region.per_policy_data[policy.id] != null)
                 ds.push({
-                    data: processData(first_region, policy.id), 
+                    data: processData(first_region, policy.id,0), 
                     label: first_region.label,
-                    bars: { show: true, barWidth: 0.35, order: 1 }
+                    bars: { show: true, barWidth: 0.35 }
                 });
             if (second_region.per_policy_data != null && second_region.per_policy_data[policy.id] != null)
                 ds.push({
-                    data: processData(second_region, policy.id), 
+                    data: processData(second_region, policy.id,0.4), 
                     label: second_region.label,
-                    bars: { show: true, barWidth: 0.35, order: 2 }
+                    bars: { show: true, barWidth: 0.35 }
                 });
             
             $.plot(graphs[policy.id], ds, options);
