@@ -33,7 +33,9 @@ class RegionBudgetApp < Sinatra::Base
     # Fetch relevant data
     region = Region.first(:id => params[:region])
     expenses = region.expenses
-    populations = region.populations
+    
+    populations = {}
+    region.populations.each{|p| populations[p.year.to_s] = p.size }
     
     # Reshuffle as needed for visualization
     per_policy_data = {}
@@ -54,7 +56,7 @@ class RegionBudgetApp < Sinatra::Base
     response = { 
       :label => region.name, 
       :per_policy_data => per_policy_data,
-      :populations => populations.map{|p| {p.year.to_s => p.size}}
+      :populations => populations
       }
     response.to_json
   end  

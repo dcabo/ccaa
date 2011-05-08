@@ -11,13 +11,13 @@
 	%h3.alt.span-8#region1-div{:style => "border-bottom: 8px solid rgb(237,194,64)"}
 		Elige una comunidad autónoma...
 		%select#region
-			%option{:select=>true} &nbsp;
+			%option{:selected=>true} &nbsp;
 			-@regions.each do |region|
 				%option{:value=>"#{region.id}"} #{region.name}
 	%h3.alt.span-8#region2-div{:style => "border-bottom: 8px solid rgb(175,216,248)"}
 		&nbsp;...y compárala con otra
 		%select#region2
-			%option{:select=>true} &nbsp;
+			%option{:selected=>true} &nbsp;
 			-@regions.each do |region|
 				%option{:value=>"#{region.id}"} #{region.name}
 	%hr.space
@@ -40,4 +40,4 @@
 			Estás viendo...
 			%select#comparison_mode
 				%option{:value=>"total"} Gasto total (miles de euros)
-				%option{:value=>"per_capita"} Gasto per cápita
+				%option{:selected=>true, :value=>"per_capita"} Gasto per cápita

@@ -74,14 +74,20 @@ $(function () {
     
     // Calculate data if needed
     function processData(data, policy_id) {
+        var series = [];
         switch ($("#comparison_mode").val()) {
             case 'total':
-                return data[policy_id];
+                series = data.per_policy_data[policy_id];
+                break;
                 
             case 'per_capita':
             default:
-                return data[policy_id];
+                $.each(data.per_policy_data[policy_id], function(i, expense) {
+                    series.push([expense[0], 1000.0*expense[1]/data.populations[2010]]);
+                });
+                break;
         }
+        return series;
     }
     
     // Redraw all graphs
@@ -90,13 +96,13 @@ $(function () {
             var ds = new Array();
             if (first_region.per_policy_data != null && first_region.per_policy_data[policy.id] != null)
                 ds.push({
-                    data: processData(first_region.per_policy_data, policy.id), 
+                    data: processData(first_region, policy.id), 
                     label: first_region.label,
                     bars: { show: true, barWidth: 0.35, order: 1 }
                 });
             if (second_region.per_policy_data != null && second_region.per_policy_data[policy.id] != null)
                 ds.push({
-                    data: processData(second_region.per_policy_data, policy.id), 
+                    data: processData(second_region, policy.id), 
                     label: second_region.label,
                     bars: { show: true, barWidth: 0.35, order: 2 }
                 });
@@ -124,7 +130,7 @@ $(function () {
         fetchData($("#region2").val(), onDataReceived);
     });
 
-    $("#region").change(function () {
+    $("#comparison_mode").change(function () {
         displayGraphs();    // Redraw
     });
 });
