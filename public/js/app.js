@@ -11,10 +11,9 @@ $(function () {
     $.plot(placeholder, [], options);
     
     $("#region").change(function () {
-        function onDataReceived(series) {
-            first_region = series;
-            var data = [first_region, second_region];
-            $.plot(placeholder, data, options);
+        function onDataReceived(data) {
+            first_region = data.per_policy_data['33'];
+            $.plot(placeholder, [first_region, second_region], options);
         }
         
         var dataurl = "/ca/"+$("#region").val();

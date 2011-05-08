@@ -26,15 +26,15 @@ class RegionBudgetApp < Sinatra::Base
     # Reorder as needed for visualization
     per_policy_data = {}
     expenses.each do |e|
-      per_policy_data[e.policy_id] = [] if per_policy_data[e.policy_id].nil?
-      per_policy_data[e.policy_id] << [e.year, e.amount]
+      per_policy_data[e.policy_id] = {:label => region.name, :data => []} if per_policy_data[e.policy_id].nil?
+      per_policy_data[e.policy_id][:data] << [e.year, e.amount]
     end
     
     # Prepare JSON response
     content_type :json
     response = { 
       :label => region.name, 
-      :data => per_policy_data['11']  # FIXME 
+      :per_policy_data => per_policy_data
       }
     response.to_json
   end
