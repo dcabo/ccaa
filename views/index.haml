@@ -1,3 +1,6 @@
 %div
-	%h1
-		Hello world!
+	%h1 Elige una comunidad autónoma
+
+	-@regions.each do |region|
+		%li 
+			%a{:href=>"/ca/#{region.id}"} #{region.name}

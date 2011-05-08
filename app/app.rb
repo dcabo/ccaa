@@ -13,7 +13,14 @@ class RegionBudgetApp < Sinatra::Base
   set :public, 'public'
   
   get '/' do
+    @regions = Region.all
     haml :index
+  end
+  
+  get '/ca/:region' do
+    @region = Region.first(:id => params[:region])
+    @expenses = @region.expenses
+    haml :region
   end
   
 end

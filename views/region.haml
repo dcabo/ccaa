@@ -1,0 +1,6 @@
+%div
+	%h1 #{@region.name}
+	
+	-@expenses.each do |e|
+		%li #{e.year} #{e.policy.id} #{e.policy.name} #{e.amount}
+	
