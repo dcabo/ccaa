@@ -1,6 +1,5 @@
 Features
 ========
-- Comparar con segunda comunidad
 - Añadir texto introductorio
 - Add URL history handling
 
@@ -12,10 +11,10 @@ Data
 - Ajustar inflación
 - Sort graphs by amount? or just manually according to myself?
 - Add region: national average
+- Remove a few categories, always blank (defensa...)
 
 Look and feel
 =============
-- Improve handling of graphs with no data
 - Mejorar look título
 - Add graph label formatter
 - Add hover

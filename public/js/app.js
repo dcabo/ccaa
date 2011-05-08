@@ -18,10 +18,8 @@ $(function () {
     });
     
     var options = {
-        bars: { show: true, barWidth: 0.8 },
         xaxis: { tickDecimals: 0, tickSize: 1, labelWidth: 40, reserveSpace: true },
-        legend: { show: false },
-        grid: { markings: [] }
+        legend: { show: false }
     };
     var first_region = {};
     var second_region = {};
@@ -38,15 +36,19 @@ $(function () {
     
     function displayGraphs() {
         $.each(policies, function(i, policy) { 
-            var first = [];
+            var ds = new Array();
             if (first_region.per_policy_data != null && first_region.per_policy_data[policy.id] != null)
-                first = first_region.per_policy_data[policy.id];
-            
-            var second = [];
+                ds.push({
+                    data: first_region.per_policy_data[policy.id].data, 
+                    bars: { show: true, barWidth: 0.35, order: 1 }
+                });
             if (second_region.per_policy_data != null && second_region.per_policy_data[policy.id] != null)
-                second = second_region.per_policy_data[policy.id];
-                
-            $.plot(graphs[policy.id], [first, second], options);
+                ds.push({
+                    data: second_region.per_policy_data[policy.id].data, 
+                    bars: { show: true, barWidth: 0.35, order: 2 }
+                });
+            
+            $.plot(graphs[policy.id], ds, options);
         });
         $("#graphs").show();    // Hidden at start
     }
