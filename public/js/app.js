@@ -113,12 +113,14 @@ $(function () {
                 ds.push({
                     data: processData(first_region, policy.id,0), 
                     label: first_region.label,
+                    color: 'rgb(237,194,64)',
                     bars: { show: true, barWidth: 0.35 }
                 });
             if (second_region.per_policy_data != null && second_region.per_policy_data[policy.id] != null)
                 ds.push({
                     data: processData(second_region, policy.id,0.4), 
                     label: second_region.label,
+                    color: 'rgb(175,216,248)',
                     bars: { show: true, barWidth: 0.35 }
                 });
             
