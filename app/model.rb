@@ -10,6 +10,7 @@ class Region
   property :name,         String, :length => 50
   
   has n, :expenses
+  has n, :populations
 end
 
 class Policy
