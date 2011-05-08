@@ -89,12 +89,11 @@ $(function () {
                 });
                 break;
 
-            // case 'share_total':
-            // default:
-            //     $.each(data.per_policy_data[policy_id], function(i, expense) {
-            //         series.push([expense[0], expense[1]/data.populations[expense[0]]]);
-            //     });
-            //     break;
+            case 'share_total':
+                $.each(data.per_policy_data[policy_id], function(year, expense) {
+                    series.push([parseInt(year)+offset, 100.0*expense/data.per_policy_data['00'][year]]);
+                });
+                break;
                 
             case 'per_capita':
             default:
