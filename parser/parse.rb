@@ -1,13 +1,14 @@
 require 'rubygems'
 require 'nokogiri'
 require 'csv'
+require 'iconv'
 
 def clean_number(s)
   s.delete('.').gsub(',','.')
 end
 
 def parse_file(filename)
-  doc = Nokogiri::HTML(open(filename))
+  doc = Nokogiri::HTML(open(filename, "r:ISO-8859-1"))
   
   # I thought the CA name was a good key, but turns out it changes sligthly
   # with time. So we'll use the original id instead, part of the filename
@@ -36,7 +37,8 @@ def parse_file(filename)
   
     # ...and ignore the subtotal rows
     policy_id = columns.shift.text
-    policy_label = columns.shift.text
+    # Always encoding black magic :/
+    policy_label = Iconv.iconv("iso-8859-1", "utf-8", columns.shift.text).first
   
     # Extract the values from remaining columns
     values = columns.map {|c| clean_number(c.text.strip)}
