@@ -15,9 +15,12 @@ def parse_file(filename)
   region_id = $1
   
   # First, get the metadata about the file from the first chunk of text
-  doc.css('font')[0].text.strip =~ /Ejercicio (\d\d\d\d)\. +(.+)$/
+  title = doc.css('h1')[0]
+  return if title.nil? # Some error pages
+  title.text.strip =~ /EJERCICIO +(\d\d\d\d)/
   year = $1
-  region_name = $2
+
+  region_name = doc.css('h3')[0].text.strip
   
   # ...make sure it's fine...
   if year.nil? or year.empty? or region_name.nil? or region_name.empty?
@@ -29,23 +32,30 @@ def parse_file(filename)
   doc.css('tr').each do |r|
     # ...but look only at the ones with the data
     columns = r.css('td')
-    next if columns.size!=11
+    next if columns.size!=12
   
     # ...and ignore the subtotal rows
-    name = columns.shift
-    next unless name.text.strip =~ /^(\d\d) (.+)$/
-    policy_id = $1
-    policy_label = $2
+    policy_id = columns.shift.text
+    policy_label = columns.shift.text
   
     # Extract the values from remaining columns
     values = columns.map {|c| clean_number(c.text.strip)}
   
-    # And output
-    puts CSV::generate_line([region_id, region_name,year,policy_id,policy_label]+values)
+    # And output. Note: at the moment we just care about what gets shown in the DVMI region 
+    # visualization, so we ignore a bunch of stuff. We display only:
+    #  - the total expense, even if we have the chapter breakdown. 
+    #  - region id is enough, name not needed.
+    #  - only for years after (and including) 2006
+    #  - only for actual regions, ignore the total
+    #  - only non-zero chapter-level data, ignore 'expense area' subtotals
+    if year.to_i >= 2006 and region_id != '00' and policy_id =~ /\d\d/ and !values.last.empty?
+      puts CSV::generate_line([year, region_id.to_i, policy_id, policy_label, values.last])
+    end
   end
 end
 
-# puts "region, year, policy_id, policy_label, values*9, total"
+# puts CSV::generate_line(['year', 'region_id', 'policy_id', 'policy_label', 'total'])
+puts 'Ano,Idcomu,Codigo,Funcion,Total'  # Header expected by Javascript in DVMI
 
 # Parse all files in the staging folder
 Dir['staging/*txt'].each {|filename| parse_file(filename)}
